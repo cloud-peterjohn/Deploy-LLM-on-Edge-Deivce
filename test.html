@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./test.css">
+</head>
+
+<body>
+    <div class="header-bar">
+        <span class="project-title">Quant & Deploy</span>
+    </div>
+
+    <p>
+        <span class="step-label">Step 1</span>: Download Quantized Model
+    </p>
+    <div class="download-container">
+        <span id="model-display">Llama-3.2-3B-Instruct (W4A16)</span>
+        <button id="download">
+            Download
+        </button>
+    </div>
+    <p id="download-status" class="hidden"></p>
+
+    <p>
+        <span class="step-label">Step 2</span>: Chat
+    </p>
+    <div class="chat-container">
+        <div id="chat-box" class="chat-box"></div>
+        <div id="chat-stats" class="chat-stats hidden"></div>
+        <div class="chat-input-container">
+            <input type="text" id="user-input" placeholder="Type a message..." />
+            <button id="send" disabled>Send</button>
+        </div>
+    </div>
+
+    <div id="gpu-info" class="gpu-info">
+        <div class="gpu-header">GPU Information</div>
+        <div id="gpu-content">Getting GPU info...</div>
+    </div>
+
+    <script src="./test.js" type="module"></script>
+</body>
+
+</html>
