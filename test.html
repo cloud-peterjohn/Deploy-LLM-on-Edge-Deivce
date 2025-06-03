@@ -1,3 +1,13 @@
+<!-- 
+How to Run the Chatbot?
+python -m http.server 8000
+Then visit http://localhost:8000/test.html
+or
+npm install -g http-server
+http-server
+Then visit the URL provided by the http-server command 
+-->
+
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +27,218 @@
         <span class="step-label">Step 1</span>: Download Quantized Model
     </p>
     <div class="download-container">
-        <span id="model-display">Llama-3.2-3B-Instruct (W4A16)</span>
+        <div class="model-selection" style="margin-bottom: 10px;">
+            <label for="model-select">Choose Model:</label>
+            <select id="model-select" style="margin-left: 10px; padding: 5px;">
+                <optgroup label="Llama 3.2 (3B)">
+                    <option value="Llama-3.2-3B-Instruct-W4A16-Quantized" style="color: red;">
+                        Llama-3.2-3B-Instruct-W4A16 (2.3GB, quantized by us)
+                    </option>
+                </optgroup>
+
+                <optgroup label="Llama 3.2 (1B)">
+                    <option value="Llama-3.2-1B-Instruct-q4f32_1-MLC">Llama-3.2-1B-Instruct-q4f32_1-MLC (1.1GB)</option>
+                    <option value="Llama-3.2-1B-Instruct-q4f16_1-MLC">Llama-3.2-1B-Instruct-q4f16_1-MLC (879MB)</option>
+                    <option value="Llama-3.2-1B-Instruct-q0f32-MLC">Llama-3.2-1B-Instruct-q0f32-MLC (5.1GB)</option>
+                    <option value="Llama-3.2-1B-Instruct-q0f16-MLC">Llama-3.2-1B-Instruct-q0f16-MLC (2.6GB)</option>
+                </optgroup>
+
+                <optgroup label="Llama 3.1 (8B)">
+                    <option value="Llama-3.1-8B-Instruct-q4f32_1-MLC-1k">Llama-3.1-8B-Instruct-q4f32_1-MLC-1k (5.3GB)
+                    </option>
+                    <option value="Llama-3.1-8B-Instruct-q4f16_1-MLC-1k">Llama-3.1-8B-Instruct-q4f16_1-MLC-1k (4.6GB)
+                    </option>
+                    <option value="Llama-3.1-8B-Instruct-q4f32_1-MLC">Llama-3.1-8B-Instruct-q4f32_1-MLC (6.1GB)</option>
+                    <option value="Llama-3.1-8B-Instruct-q4f16_1-MLC">Llama-3.1-8B-Instruct-q4f16_1-MLC (5.0GB)</option>
+                </optgroup>
+
+                <optgroup label="DeepSeek R1 Distill">
+                    <option value="DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC">DeepSeek-R1-Distill-Qwen-7B-q4f16_1-MLC
+                        (5.1GB)
+                    </option>
+                    <option value="DeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLC">DeepSeek-R1-Distill-Qwen-7B-q4f32_1-MLC
+                        (5.9GB)
+                    </option>
+                    <option value="DeepSeek-R1-Distill-Llama-8B-q4f32_1-MLC">DeepSeek-R1-Distill-Llama-8B-q4f32_1-MLC
+                        (6.1GB)
+                    </option>
+                    <option value="DeepSeek-R1-Distill-Llama-8B-q4f16_1-MLC">DeepSeek-R1-Distill-Llama-8B-q4f16_1-MLC
+                        (5.0GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="Hermes Models">
+                    <option value="Hermes-2-Theta-Llama-3-8B-q4f16_1-MLC">Hermes-2-Theta-Llama-3-8B-q4f16_1-MLC (5.0GB)
+                    </option>
+                    <option value="Hermes-2-Theta-Llama-3-8B-q4f32_1-MLC">Hermes-2-Theta-Llama-3-8B-q4f32_1-MLC (6.1GB)
+                    </option>
+                    <option value="Hermes-2-Pro-Llama-3-8B-q4f16_1-MLC">Hermes-2-Pro-Llama-3-8B-q4f16_1-MLC (5.0GB)
+                    </option>
+                    <option value="Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC">Hermes-2-Pro-Llama-3-8B-q4f32_1-MLC (6.1GB)
+                    </option>
+                    <option value="Hermes-3-Llama-3.2-3B-q4f32_1-MLC">Hermes-3-Llama-3.2-3B-q4f32_1-MLC (3.0GB)</option>
+                    <option value="Hermes-3-Llama-3.2-3B-q4f16_1-MLC">Hermes-3-Llama-3.2-3B-q4f16_1-MLC (2.3GB)</option>
+                    <option value="Hermes-3-Llama-3.1-8B-q4f32_1-MLC">Hermes-3-Llama-3.1-8B-q4f32_1-MLC (5.8GB)</option>
+                    <option value="Hermes-3-Llama-3.1-8B-q4f16_1-MLC">Hermes-3-Llama-3.1-8B-q4f16_1-MLC (4.9GB)</option>
+                    <option value="Hermes-2-Pro-Mistral-7B-q4f16_1-MLC">Hermes-2-Pro-Mistral-7B-q4f16_1-MLC (4.0GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="Phi 3.5 Models">
+                    <option value="Phi-3.5-mini-instruct-q4f16_1-MLC">Phi-3.5-mini-instruct-q4f16_1-MLC (3.7GB)</option>
+                    <option value="Phi-3.5-mini-instruct-q4f32_1-MLC">Phi-3.5-mini-instruct-q4f32_1-MLC (5.5GB)</option>
+                    <option value="Phi-3.5-mini-instruct-q4f16_1-MLC-1k">Phi-3.5-mini-instruct-q4f16_1-MLC-1k (2.5GB)
+                    </option>
+                    <option value="Phi-3.5-mini-instruct-q4f32_1-MLC-1k">Phi-3.5-mini-instruct-q4f32_1-MLC-1k (3.2GB)
+                    </option>
+                    <option value="Phi-3.5-vision-instruct-q4f16_1-MLC">Phi-3.5-vision-instruct-q4f16_1-MLC (4.0GB)
+                    </option>
+                    <option value="Phi-3.5-vision-instruct-q4f32_1-MLC">Phi-3.5-vision-instruct-q4f32_1-MLC (5.9GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="Mistral Models">
+                    <option value="Mistral-7B-Instruct-v0.3-q4f16_1-MLC">Mistral-7B-Instruct-v0.3-q4f16_1-MLC (4.6GB)
+                    </option>
+                    <option value="Mistral-7B-Instruct-v0.3-q4f32_1-MLC">Mistral-7B-Instruct-v0.3-q4f32_1-MLC (5.6GB)
+                    </option>
+                    <option value="Mistral-7B-Instruct-v0.2-q4f16_1-MLC">Mistral-7B-Instruct-v0.2-q4f16_1-MLC (4.6GB)
+                    </option>
+                    <option value="OpenHermes-2.5-Mistral-7B-q4f16_1-MLC">OpenHermes-2.5-Mistral-7B-q4f16_1-MLC (4.6GB)
+                    </option>
+                    <option value="NeuralHermes-2.5-Mistral-7B-q4f16_1-MLC">NeuralHermes-2.5-Mistral-7B-q4f16_1-MLC
+                        (4.6GB)
+                    </option>
+                    <option value="WizardMath-7B-V1.1-q4f16_1-MLC" selected>WizardMath-7B-V1.1-q4f16_1-MLC (4.6GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="SmolLM2 Models">
+                    <option value="SmolLM2-1.7B-Instruct-q4f16_1-MLC">SmolLM2-1.7B-Instruct-q4f16_1-MLC (1.8GB)</option>
+                    <option value="SmolLM2-1.7B-Instruct-q4f32_1-MLC">SmolLM2-1.7B-Instruct-q4f32_1-MLC (2.7GB)</option>
+                    <option value="SmolLM2-360M-Instruct-q0f16-MLC">SmolLM2-360M-Instruct-q0f16-MLC (872MB)</option>
+                    <option value="SmolLM2-360M-Instruct-q0f32-MLC">SmolLM2-360M-Instruct-q0f32-MLC (1.7GB)</option>
+                    <option value="SmolLM2-360M-Instruct-q4f16_1-MLC">SmolLM2-360M-Instruct-q4f16_1-MLC (376MB)</option>
+                    <option value="SmolLM2-360M-Instruct-q4f32_1-MLC">SmolLM2-360M-Instruct-q4f32_1-MLC (580MB)</option>
+                    <option value="SmolLM2-135M-Instruct-q0f16-MLC">SmolLM2-135M-Instruct-q0f16-MLC (360MB)</option>
+                    <option value="SmolLM2-135M-Instruct-q0f32-MLC">SmolLM2-135M-Instruct-q0f32-MLC (719MB)</option>
+                </optgroup>
+
+                <optgroup label="Gemma Models">
+                    <option value="gemma-2-2b-it-q4f16_1-MLC">gemma-2-2b-it-q4f16_1-MLC (1.9GB)</option>
+                    <option value="gemma-2-2b-it-q4f32_1-MLC">gemma-2-2b-it-q4f32_1-MLC (2.5GB)</option>
+                    <option value="gemma-2-2b-it-q4f16_1-MLC-1k">gemma-2-2b-it-q4f16_1-MLC-1k (1.6GB)</option>
+                    <option value="gemma-2-2b-it-q4f32_1-MLC-1k">gemma-2-2b-it-q4f32_1-MLC-1k (1.9GB)</option>
+                    <option value="gemma-2-9b-it-q4f16_1-MLC">gemma-2-9b-it-q4f16_1-MLC (6.4GB)</option>
+                    <option value="gemma-2-9b-it-q4f32_1-MLC">gemma-2-9b-it-q4f32_1-MLC (8.4GB)</option>
+                    <option value="gemma-2-2b-jpn-it-q4f16_1-MLC">gemma-2-2b-jpn-it-q4f16_1-MLC (1.9GB)</option>
+                    <option value="gemma-2-2b-jpn-it-q4f32_1-MLC">gemma-2-2b-jpn-it-q4f32_1-MLC (2.5GB)</option>
+                </optgroup>
+
+                <optgroup label="Qwen3 Models">
+                    <option value="Qwen3-0.6B-q4f16_1-MLC">Qwen3-0.6B-q4f16_1-MLC (1.4GB)</option>
+                    <option value="Qwen3-0.6B-q4f32_1-MLC">Qwen3-0.6B-q4f32_1-MLC (1.9GB)</option>
+                    <option value="Qwen3-0.6B-q0f16-MLC">Qwen3-0.6B-q0f16-MLC (2.2GB)</option>
+                    <option value="Qwen3-0.6B-q0f32-MLC">Qwen3-0.6B-q0f32-MLC (3.8GB)</option>
+                    <option value="Qwen3-1.7B-q4f16_1-MLC">Qwen3-1.7B-q4f16_1-MLC (2.0GB)</option>
+                    <option value="Qwen3-1.7B-q4f32_1-MLC">Qwen3-1.7B-q4f32_1-MLC (2.6GB)</option>
+                    <option value="Qwen3-4B-q4f16_1-MLC">Qwen3-4B-q4f16_1-MLC (3.4GB)</option>
+                    <option value="Qwen3-4B-q4f32_1-MLC">Qwen3-4B-q4f32_1-MLC (4.3GB)</option>
+                    <option value="Qwen3-8B-q4f16_1-MLC">Qwen3-8B-q4f16_1-MLC (5.7GB)</option>
+                    <option value="Qwen3-8B-q4f32_1-MLC">Qwen3-8B-q4f32_1-MLC (6.9GB)</option>
+                </optgroup>
+
+                <optgroup label="Qwen2.5 Instruct">
+                    <option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC">Qwen2.5-0.5B-Instruct-q4f16_1-MLC (945MB)</option>
+                    <option value="Qwen2.5-0.5B-Instruct-q4f32_1-MLC">Qwen2.5-0.5B-Instruct-q4f32_1-MLC (1.1GB)</option>
+                    <option value="Qwen2.5-0.5B-Instruct-q0f16-MLC">Qwen2.5-0.5B-Instruct-q0f16-MLC (1.6GB)</option>
+                    <option value="Qwen2.5-0.5B-Instruct-q0f32-MLC">Qwen2.5-0.5B-Instruct-q0f32-MLC (2.7GB)</option>
+                    <option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC">Qwen2.5-1.5B-Instruct-q4f16_1-MLC (1.6GB)</option>
+                    <option value="Qwen2.5-1.5B-Instruct-q4f32_1-MLC">Qwen2.5-1.5B-Instruct-q4f32_1-MLC (1.9GB)</option>
+                    <option value="Qwen2.5-3B-Instruct-q4f16_1-MLC">Qwen2.5-3B-Instruct-q4f16_1-MLC (2.5GB)</option>
+                    <option value="Qwen2.5-3B-Instruct-q4f32_1-MLC">Qwen2.5-3B-Instruct-q4f32_1-MLC (2.9GB)</option>
+                    <option value="Qwen2.5-7B-Instruct-q4f16_1-MLC">Qwen2.5-7B-Instruct-q4f16_1-MLC (5.1GB)</option>
+                    <option value="Qwen2.5-7B-Instruct-q4f32_1-MLC">Qwen2.5-7B-Instruct-q4f32_1-MLC (5.9GB)</option>
+                </optgroup>
+
+                <optgroup label="Qwen2.5 Coder">
+                    <option value="Qwen2.5-Coder-0.5B-Instruct-q4f16_1-MLC">Qwen2.5-Coder-0.5B-Instruct-q4f16_1-MLC
+                        (945MB)
+                    </option>
+                    <option value="Qwen2.5-Coder-0.5B-Instruct-q4f32_1-MLC">Qwen2.5-Coder-0.5B-Instruct-q4f32_1-MLC
+                        (1.1GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-0.5B-Instruct-q0f16-MLC">Qwen2.5-Coder-0.5B-Instruct-q0f16-MLC (1.6GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-0.5B-Instruct-q0f32-MLC">Qwen2.5-Coder-0.5B-Instruct-q0f32-MLC (2.7GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-1.5B-Instruct-q4f16_1-MLC">Qwen2.5-Coder-1.5B-Instruct-q4f16_1-MLC
+                        (1.6GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-1.5B-Instruct-q4f32_1-MLC">Qwen2.5-Coder-1.5B-Instruct-q4f32_1-MLC
+                        (1.9GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC">Qwen2.5-Coder-3B-Instruct-q4f16_1-MLC (2.5GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-3B-Instruct-q4f32_1-MLC">Qwen2.5-Coder-3B-Instruct-q4f32_1-MLC (2.9GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC">Qwen2.5-Coder-7B-Instruct-q4f16_1-MLC (5.1GB)
+                    </option>
+                    <option value="Qwen2.5-Coder-7B-Instruct-q4f32_1-MLC">Qwen2.5-Coder-7B-Instruct-q4f32_1-MLC (5.9GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="Qwen2.5 Math">
+                    <option value="Qwen2.5-Math-1.5B-Instruct-q4f16_1-MLC">Qwen2.5-Math-1.5B-Instruct-q4f16_1-MLC
+                        (1.6GB)
+                    </option>
+                    <option value="Qwen2.5-Math-1.5B-Instruct-q4f32_1-MLC">Qwen2.5-Math-1.5B-Instruct-q4f32_1-MLC
+                        (1.9GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="StableLM Models">
+                    <option value="stablelm-2-zephyr-1_6b-q4f16_1-MLC">stablelm-2-zephyr-1_6b-q4f16_1-MLC (2.1GB)
+                    </option>
+                    <option value="stablelm-2-zephyr-1_6b-q4f32_1-MLC">stablelm-2-zephyr-1_6b-q4f32_1-MLC (3.0GB)
+                    </option>
+                    <option value="stablelm-2-zephyr-1_6b-q4f16_1-MLC-1k">stablelm-2-zephyr-1_6b-q4f16_1-MLC-1k (1.5GB)
+                    </option>
+                    <option value="stablelm-2-zephyr-1_6b-q4f32_1-MLC-1k">stablelm-2-zephyr-1_6b-q4f32_1-MLC-1k (1.8GB)
+                    </option>
+                </optgroup>
+
+                <optgroup label="RedPajama Models">
+                    <option value="RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC">RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC
+                        (3.0GB)
+                    </option>
+                    <option value="RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC">RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC
+                        (3.9GB)
+                    </option>
+                    <option value="RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1k">
+                        RedPajama-INCITE-Chat-3B-v1-q4f16_1-MLC-1k
+                        (2.0GB)</option>
+                    <option value="RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1k">
+                        RedPajama-INCITE-Chat-3B-v1-q4f32_1-MLC-1k
+                        (2.6GB)</option>
+                </optgroup>
+
+                <optgroup label="TinyLlama Models">
+                    <option value="TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC">TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC (697MB)
+                    </option>
+                    <option value="TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC">TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC (840MB)
+                    </option>
+                    <option value="TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1k">TinyLlama-1.1B-Chat-v1.0-q4f16_1-MLC-1k
+                        (675MB)
+                    </option>
+                    <option value="TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1k">TinyLlama-1.1B-Chat-v1.0-q4f32_1-MLC-1k
+                        (796MB)
+                    </option>
+                </optgroup>
+            </select>
+        </div>
+
+
         <button id="download">
             Download
         </button>
