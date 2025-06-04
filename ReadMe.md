@@ -112,13 +112,13 @@ The application leverages WebLLM to run language models directly in the browser:
 ## Results
 Before quantization, the pre-finetuned Llama-3.2-3B-Instruct model has a perplexity of **9.5** on the WikiText2 dataset, while the quantized W4A16 model achieves a perplexity of **11.21**.
 
-We deployed the quantized model on **NVIDIA RTX 3060** GPU in laptop, as shown in this [video](). 
+We deployed the quantized model on **NVIDIA RTX 3060** GPU in laptop, as shown in this **[video](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/Recording.mp4)**. 
 The NVIDIA GeForce RTX 3060, built on the Ampere architecture with a GA106 core, features 3584 CUDA cores, a boost clock of 1777 MHz, 6GB VRAM memory, supports DLSS 2.0 and second-gen ray tracing, and delivers strong 1080p and 1440p gaming performance while maintaining a 170W TDP.
 On this GPU, the model can run with a throughput of **25.1744** tokens per second.
-![3060-tput]()
+![3060-tput](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/NVIDIA-RTX3060.png)
 
 Moreover, we deploy the quantized model on **AMD 7840H** in laptop. 
 The AMD Ryzen 7 7840H features an integrated GPU known as the Radeon 780M, which features RDNA 3 architecture with 12 Compute Units (768 stream processors), and supports DirectX 12 Ultimate, Vulkan, and basic ray tracing. 
 Notably, the Radeon 780M integrated GPU in the AMD 7840H does not have dedicated VRAM but dynamically shares system memory (RAM), with allocation varying based on BIOS settings, OS management, and the installed RAM type and capacity. 
 On this GPU, the model can run with a throughput of **11.1195** tokens per second. 
-![7840-tput]()
+![7840-tput](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/Radeon-780M.png)
