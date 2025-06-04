@@ -5,7 +5,8 @@ A browser-based AI chatbot powered by WebLLM that runs W4A16 quantized Llama-3.2
 
 1. **Navigate to the Project Directory**
 ```bash
-cd path/to/project-directory
+git clone https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce.git
+cd Deploy-LLM-on-Edge-Deivce
 ```
 
 2. **Start a Local HTTP Server**
