@@ -22,7 +22,8 @@ Choose from available quantized models, including the W4A16 Llama-3.2-3B-Instruc
 5. **Download Model**
 Click "Download" to cache the selected model locally (first download may take several minutes depending on model size)
 
-
+6. **Start Chatting**
+Once downloaded, interact with the model through the chat interface with real-time streaming responses. Throughput will also be displayed in the web page.
 
 ## File Structure
 
