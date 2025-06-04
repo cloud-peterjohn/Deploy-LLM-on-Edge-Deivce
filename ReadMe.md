@@ -60,16 +60,24 @@ $$\hat{w}{i,j} = \text{Quantize}(w{i,j})$$
 where the quantization function maps continuous weights to discrete levels. 
 
 The quantization error for each weight is computed as:
+
 $$e_{i,j} = w_{i,j} - \hat{w}_{i,j}$$
+
 To compensate for this quantization error and prevent its accumulation across the network, GPTQ applies a correction mechanism. The key insight is that the error introduced by quantizing weight $w_{i,j}$ can be partially compensated by adjusting the remaining unquantized weights in the same row. The correction is computed using the inverse Hessian:
+
 $$\mathbf{W}{i, j+1:d{in}} = \mathbf{W}{i, j+1:d{in}} - \frac{e_{i,j}}{\mathbf{H}{j,j}} \mathbf{H}{j, j+1:d_{in}}$$
+
 This update rule ensures that the cumulative effect of quantization errors is minimized by optimally redistributing the error among subsequent weights according to the second-order structure of the problem.
 However, the Hessian inverse computation presents computational challenges for large matrices. GPTQ addresses this through an efficient Cholesky decomposition approach, updating the Hessian inverse incrementally as weights are quantized. When quantizing weight $w_{i,j}$, the corresponding row and column of the Hessian inverse are updated using the Sherman-Morrison formula:
+
 $$\mathbf{H}^{-1}{new} = \mathbf{H}^{-1}{old} - \frac{\mathbf{H}^{-1}_{old} \mathbf{e}_j \mathbf{e}j^T \mathbf{H}^{-1}{old}}{\mathbf{e}j^T \mathbf{H}^{-1}{old} \mathbf{e}_j}$$
+
 where $\mathbf{e}_j$ is the $j$-th standard basis vector.
 
 The quantization scheme employed in GPTQ typically utilizes uniform quantization with learned scales and zero points. For $b$-bit quantization, weights are mapped to integers in the range $[0, 2^b-1]$ according to:
+
 $$\hat{w} = \text{clamp}\left(\left\lfloor\frac{w - z}{s}\right\rceil, 0, 2^b-1\right)$$
+
 where $s$ is the scale factor, $z$ is the zero point, and $\lfloor\cdot\rceil$ denotes rounding to the nearest integer. The scale and zero point are computed to minimize quantization error within each group of weights.
 
 Group-wise quantization further enhances the method's effectiveness by partitioning weight matrices into smaller groups, each with its own quantization parameters. This approach captures local statistics more effectively, particularly important for transformer architectures where different attention heads or feed-forward components may exhibit distinct weight distributions. The group size $g$ becomes a hyperparameter that trades off between quantization accuracy and metadata overhead.
@@ -118,6 +126,7 @@ The application leverages WebLLM to run language models directly in the browser:
 2. **WebGPU Acceleration**: Utilizes the user's GPU through WebGPU API for efficient model inference, enabling real-time chat responses
 3. **Memory Management**: Automatically manages GPU memory allocation and monitors VRAM usage to ensure stable performance
 4. **Quantized Models**: Supports various quantization formats (4-bit, 16-bit) to balance model quality with resource requirements
+
 
 ## Results
 Before quantization, the pre-finetuned Llama-3.2-3B-Instruct model has a perplexity of **9.5** on the WikiText2 dataset, while the quantized W4A16 model achieves a perplexity of **11.21**.
