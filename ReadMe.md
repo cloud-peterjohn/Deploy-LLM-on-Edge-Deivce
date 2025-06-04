@@ -82,7 +82,7 @@ Then verify installation by running:
 ```bash
 mlc_llm --help
 ```
-Next, we install TVM Unity Compiler, you can install it [here](https://llm.mlc.ai/docs/install/tvm.html#install-tvm-unity)
+Next, we install TVM Unity Compiler, you can install it [here](https://llm.mlc.ai/docs/install/tvm.html#install-tvm-unity).
 Then verify installation by running:
 ```bash
 python -c "import tvm; print(tvm.__file__)"
