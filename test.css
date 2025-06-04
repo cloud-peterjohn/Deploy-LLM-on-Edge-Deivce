@@ -187,7 +187,7 @@ button:hover:not(:disabled) {
     font-family: 'Courier New', monospace;
     white-space: pre-wrap;
     background-color: #000;
-    color: #00ff00;
+    color: #c578fc;
     min-height: 100px;
     overflow-x: auto;
 }
