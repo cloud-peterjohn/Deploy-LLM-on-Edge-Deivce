@@ -134,10 +134,10 @@ On this GPU, the model can run with a throughput of **11.1195** tokens per secon
 ![7840-tput](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/Radeon-780M.png)
 
 ## References
-- [AutoGPTQ](https://github.com/AutoGPTQ/AutoGPTQ.git): https://github.com/AutoGPTQ/AutoGPTQ.git
-- [GPTQ-for-LLaMa](https://github.com/qwopqwop200/GPTQ-for-LLaMa.git): https://github.com/qwopqwop200/GPTQ-for-LLaMa.git
-- [GPTQ](https://github.com/IST-DASLab/gptq.git): https://github.com/IST-DASLab/gptq.git
-- [MLC-LLM](https://llm.mlc.ai/docs/): https://github.com/mlc-ai/mlc-llm.git
-- [Web-LLM](https://webllm.mlc.ai/docs/): https://github.com/mlc-ai/web-llm.git
+- **AutoGPTQ**: https://github.com/AutoGPTQ/AutoGPTQ.git
+- **GPTQ-for-LLaMa**: https://github.com/qwopqwop200/GPTQ-for-LLaMa.git
+- **GPTQ**: https://github.com/IST-DASLab/gptq.git
+- **MLC-LLM**: https://github.com/mlc-ai/mlc-llm.git
+- **Web-LLM**: https://github.com/mlc-ai/web-llm.git
 
 
