@@ -34,6 +34,15 @@ Once downloaded, interact with the model through the chat interface with real-ti
 └── ReadMe.md          # This file
 ```
 
+## Motivation
+The rapid advancement of large language models has created a significant barrier for widespread adoption due to their substantial computational requirements and memory footprint. Most state-of-the-art models require expensive cloud infrastructure or high-end datacenter GPUs, limiting accessibility for individual users and edge applications. This project addresses these challenges by demonstrating how quantization techniques combined with optimized inference frameworks can enable powerful language models to run locally on consumer hardware.
+
+We selected Llama-3.2-3B-Instruct as our target model due to its optimal balance between performance and computational efficiency. With 3 billion parameters, it provides sophisticated conversational capabilities while remaining small enough for aggressive quantization without severe quality degradation. The model's instruction-tuned nature ensures reliable chat performance, making it ideal for demonstrating practical edge deployment scenarios.
+
+Our device selection encompasses both discrete GPU (NVIDIA RTX 3060) and integrated GPU (AMD Radeon 780M) to showcase the versatility of our approach across different hardware configurations. The RTX 3060 represents a mainstream gaming GPU accessible to many users, while the Radeon 780M demonstrates deployment on ultra-portable laptops without dedicated graphics cards. This diversity validates that quantized models can democratize AI access across various personal computing devices.
+
+By leveraging AutoGPTQ quantization to compress weights to 4-bit precision and MLC-LLM for WebGPU optimization, we transform a multi-gigabyte model into a 2.3GB package that runs entirely in web browsers. This approach eliminates server dependencies, ensures data privacy through local processing, and reduces operational costs, making sophisticated AI capabilities accessible to individual users on their personal devices.
+
 ## Methods: 
 ### Quantization with AutoGPTQ
 We use AutoGPTQ, a post-training weight-only quantization library, to quantize the Llama-3.2-3B-Instruct model to W4A16 format. 
@@ -112,7 +121,7 @@ The application leverages WebLLM to run language models directly in the browser:
 ## Results
 Before quantization, the pre-finetuned Llama-3.2-3B-Instruct model has a perplexity of **9.5** on the WikiText2 dataset, while the quantized W4A16 model achieves a perplexity of **11.21**.
 
-We deployed the quantized model on **NVIDIA RTX 3060** GPU in laptop, as shown in this **[video](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/Recording.mp4)**. 
+We deployed the quantized model on **NVIDIA RTX 3060** GPU in laptop, as shown in this [video](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/Recording.mp4). 
 The NVIDIA GeForce RTX 3060, built on the Ampere architecture with a GA106 core, features 3584 CUDA cores, a boost clock of 1777 MHz, 6GB VRAM memory, supports DLSS 2.0 and second-gen ray tracing, and delivers strong 1080p and 1440p gaming performance while maintaining a 170W TDP.
 On this GPU, the model can run with a throughput of **25.1744** tokens per second.
 ![3060-tput](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/NVIDIA-RTX3060.png)
@@ -122,3 +131,12 @@ The AMD Ryzen 7 7840H features an integrated GPU known as the Radeon 780M, which
 Notably, the Radeon 780M integrated GPU in the AMD 7840H does not have dedicated VRAM but dynamically shares system memory (RAM), with allocation varying based on BIOS settings, OS management, and the installed RAM type and capacity. 
 On this GPU, the model can run with a throughput of **11.1195** tokens per second. 
 ![7840-tput](https://github.com/cloud-peterjohn/Deploy-LLM-on-Edge-Deivce/blob/main/images/Radeon-780M.png)
+
+## References
+- [AutoGPTQ](https://github.com/AutoGPTQ/AutoGPTQ.git): https://github.com/AutoGPTQ/AutoGPTQ.git
+- [GPTQ-for-LLaMa](https://github.com/qwopqwop200/GPTQ-for-LLaMa.git): https://github.com/qwopqwop200/GPTQ-for-LLaMa.git
+- [GPTQ](https://github.com/IST-DASLab/gptq.git): https://github.com/IST-DASLab/gptq.git
+- [MLC-LLM](https://llm.mlc.ai/docs/): https://github.com/mlc-ai/mlc-llm.git
+- [Web-LLM](https://webllm.mlc.ai/docs/): https://github.com/mlc-ai/web-llm.git
+
+
